@@ -13,7 +13,7 @@ main =
   do a <- getArgs
      case a of
        [] -> putStrLn "Usage: osmgarmin <output-dir>" >> exitWith (exitCode 107)
-       (o:_) -> do e <- gmapsupp [minBound .. maxBound] (\st p -> let o' = show st </> o
+       (o:_) -> do e <- gmapsupp [minBound .. maxBound] (\st p -> let o' = o </> show st
                                                                   in do mkdir o'
                                                                         copyFile p (o' </> takeFileName p))
                    isFailure e `when` putStrLn ("Error: exit with failure: " ++ show e)
