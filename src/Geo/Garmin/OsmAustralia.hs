@@ -55,6 +55,6 @@ gmapsupp s f =
                                  l = d </> k
                              in system' ("wget -O " ++ l ++ " http://www.osmaustralia.org/garmin/AU/" ++ k) ->>
                                 system' ("unzip " ++ l ++ " -d " ++ d) ->>
-                                system' ("mkgmap --gmapsupp --route --transparent --drive-on-left --description=\"" ++ description t ++ "\" --country-name=Australia --country-abbr=AU --output-dir=" ++ d ++ " " ++ (d </> "*.img")) ->->
+                                system' ("java -jar /opt/mkgmap/mkgmap.jar --gmapsupp --route --transparent --drive-on-left --description=\"" ++ description t ++ "\" --country-name=Australia --country-abbr=AU --output-dir=" ++ d ++ " " ++ (d </> "*.img")) ->->
                                 f t (d </> "gmapsupp.img"))) s)
 
