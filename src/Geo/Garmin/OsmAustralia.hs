@@ -50,11 +50,11 @@ gmapsupp ::
   -> (State -> FilePath -> IO a)
   -> IO ExitCode
 gmapsupp s f =
-  withTemporaryDirectory "osmaustralia-" 
-    (\d -> runExitCodes (map (\t -> let k = show t ++ ".img.zip"
-                                        l = d </> k
-                                    in system' ("wget -O " ++ l ++ " http://www.osmaustralia.org/garmin/AU/" ++ k) ->>
-                                       system' ("unzip " ++ l ++ " -d " ++ d) ->>
-                                       system' ("mkgmap --gmapsupp --route --transparent --drive-on-left --description=\"" ++ description t ++ "\" --country-name=Australia --country-abbr=AU --output-dir=" ++ d ++ " " ++ (d </> "*.img")) ->->
-                                       f t (d </> "gmapsupp.img")) s))
+  runExitCodes (map (\t -> withTemporaryDirectory "osmaustralia-" (\d ->
+                             let k = show t ++ ".img.zip"
+                                 l = d </> k
+                             in system' ("wget -O " ++ l ++ " http://www.osmaustralia.org/garmin/AU/" ++ k) ->>
+                                system' ("unzip " ++ l ++ " -d " ++ d) ->>
+                                system' ("mkgmap --gmapsupp --route --transparent --drive-on-left --description=\"" ++ description t ++ "\" --country-name=Australia --country-abbr=AU --output-dir=" ++ d ++ " " ++ (d </> "*.img")) ->->
+                                f t (d </> "gmapsupp.img"))) s)
 

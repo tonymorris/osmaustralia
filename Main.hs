@@ -16,4 +16,4 @@ main =
        (o:_) -> do e <- gmapsupp [minBound .. maxBound] (\st p -> let o' = o </> show st
                                                                   in do mkdir o'
                                                                         copyFile p (o' </> takeFileName p))
-                   isFailure e `when` putStrLn ("Error: exit with failure: " ++ show e)
+                   isFailure e `when` exitWith e
