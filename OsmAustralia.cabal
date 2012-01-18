@@ -1,0 +1,40 @@
+Name:               OsmAustralia
+Version:            0.0.1
+License:            BSD3
+License-File:       LICENSE
+Author:             Tony Morris <ʇǝu˙sıɹɹoɯʇ@ןןǝʞsɐɥ>
+Maintainer:         Tony Morris
+Copyright:          Tony Morris
+Synopsis:           A script to create Garmin maps from osmaustralia.org
+Category:           Development
+Description:        A script to create Garmin maps from osmaustralia.org
+Homepage:           https://github.com/tonymorris/osmaustralia
+Cabal-Version:      >= 1.6
+Build-Type:         Simple
+
+Source-Repository   head
+  Type:             git
+  Location:         git@github.com:tonymorris/osmaustralia.git
+
+Flag                small_base
+  Description:      Choose the new, split-up base package.
+
+Executable          osmaustralia
+  Main-Is:          Main.hs
+
+  Build-Depends:
+                    base < 5 && >= 3
+                    , Command
+                    , filepath
+                    , directory
+                    , Unixutils
+
+  GHC-Options:
+                    -Wall
+
+  Hs-Source-Dirs:
+                    src, .
+
+  Other-Modules:
+                    Geo.Garmin.OsmAustralia
+
